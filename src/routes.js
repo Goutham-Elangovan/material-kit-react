@@ -7,7 +7,7 @@ import UserPage from './pages/UserPage';
 
 import Page404 from './pages/Page404';
 import LoginPage from './pages/LoginPage';
-
+import EditUser from './pages/EditUser';
 
 // ----------------------------------------------------------------------
 
@@ -19,6 +19,8 @@ export default function Router() {
       children: [
         { element: <Navigate to="/dashboard/user" />, index: true },
         { path: 'user', element: <UserPage /> },
+        { path: 'editUser', element: <EditUser />}
+        
       ],
     },
     {
@@ -31,7 +33,11 @@ export default function Router() {
     },
     {
       path: 'login',
-      element: <LoginPage />
+      element: <LoginPage />,
+    },
+    {
+      path: 'editUser',
+      element: <EditUser />
     },
     {
       path: '*',
