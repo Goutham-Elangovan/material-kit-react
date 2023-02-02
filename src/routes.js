@@ -6,6 +6,7 @@ import SimpleLayout from './layouts/simple';
 import UserPage from './pages/UserPage';
 
 import Page404 from './pages/Page404';
+import LoginPage from './pages/LoginPage';
 
 
 // ----------------------------------------------------------------------
@@ -27,6 +28,10 @@ export default function Router() {
         { path: '404', element: <Page404 /> },
         { path: '*', element: <Navigate to="/404" /> },
       ],
+    },
+    {
+      path: 'login',
+      element: <LoginPage />
     },
     {
       path: '*',
