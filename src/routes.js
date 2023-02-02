@@ -4,7 +4,6 @@ import DashboardLayout from './layouts/dashboard';
 import SimpleLayout from './layouts/simple';
 //
 import UserPage from './pages/UserPage';
-
 import Page404 from './pages/Page404';
 import LoginPage from './pages/LoginPage';
 import EditUser from './pages/EditUser';
@@ -18,26 +17,26 @@ export default function Router() {
       element: <DashboardLayout />,
       children: [
         { element: <Navigate to="/dashboard/user" />, index: true },
+        { path: 'login', element: <LoginPage /> },
         { path: 'user', element: <UserPage /> },
-        { path: 'editUser', element: <EditUser />}
-        
+        { path: 'editUser', element: <EditUser /> }
       ],
     },
     {
       element: <SimpleLayout />,
       children: [
-        { element: <Navigate to="/dashboard/user" />, index: true },
+        { element: <Navigate to="/dashboard/login" />, index: true },
         { path: '404', element: <Page404 /> },
         { path: '*', element: <Navigate to="/404" /> },
       ],
     },
-    {
-      path: 'login',
-      element: <LoginPage />,
+    { 
+      path: 'editUser', 
+      element: <EditUser /> 
     },
-    {
-      path: 'editUser',
-      element: <EditUser />
+    { 
+      path: 'login', 
+      element: <LoginPage /> 
     },
     {
       path: '*',
