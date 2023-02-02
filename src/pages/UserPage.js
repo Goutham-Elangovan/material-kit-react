@@ -2,6 +2,7 @@ import { Helmet } from 'react-helmet-async';
 import { filter } from 'lodash';
 import { sentenceCase } from 'change-case';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 // @mui
 import {
   Card,
@@ -74,6 +75,7 @@ function applySortFilter(array, comparator, query) {
 }
 
 export default function UserPage() {
+  const navigate = useNavigate();
   const [open, setOpen] = useState(null);
 
   const [page, setPage] = useState(0);
@@ -88,8 +90,25 @@ export default function UserPage() {
 
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
-  const handleOpenMenu = (event) => {
+  const [selectedUserValues, setSelectedUserValues] = useState({
+    name: '',
+    role: '',
+    status: '',
+    company: '',
+    avatarUrl: '',
+    IsVerified: false,
+  });
+
+  const handleOpenMenu = (event, name, role, status, company, avatarUrl, isVerified) => {
     setOpen(event.currentTarget);
+    setSelectedUserValues({
+      name,
+      role,
+      status,
+      company,
+      avatarUrl,
+      isVerified,
+    });
   };
 
   const handleCloseMenu = () => {
@@ -138,6 +157,14 @@ export default function UserPage() {
   const handleFilterByName = (event) => {
     setPage(0);
     setFilterName(event.target.value);
+  };
+
+  const handleNavigateToEditPage = () => {
+    navigate('/editUser', {
+      state: {
+        userData: selectedUserValues,
+      },
+    });
   };
 
   const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - USERLIST.length) : 0;
@@ -208,7 +235,11 @@ export default function UserPage() {
                         </TableCell>
 
                         <TableCell align="right">
-                          <IconButton size="large" color="inherit" onClick={handleOpenMenu}>
+                          <IconButton
+                            size="large"
+                            color="inherit"
+                            onClick={(e) => handleOpenMenu(e, name, role, status, company, avatarUrl, isVerified)}
+                          >
                             <Iconify icon={'eva:more-vertical-fill'} />
                           </IconButton>
                         </TableCell>
@@ -279,7 +310,7 @@ export default function UserPage() {
           },
         }}
       >
-        <MenuItem>
+        <MenuItem onClick={handleNavigateToEditPage}>
           <Iconify icon={'eva:edit-fill'} sx={{ mr: 2 }} />
           Edit
         </MenuItem>
