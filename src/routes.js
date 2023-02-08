@@ -19,25 +19,28 @@ export default function Router() {
         { element: <Navigate to="/dashboard/user" />, index: true },
         { path: 'login', element: <LoginPage /> },
         { path: 'user', element: <UserPage /> },
-        { path: 'editUser', element: <EditUser /> }
       ],
     },
     {
       element: <SimpleLayout />,
       children: [
         { element: <Navigate to="/dashboard/login" />, index: true },
+        {
+          path: 'login',
+          element: <LoginPage />,
+        },
         { path: '404', element: <Page404 /> },
         { path: '*', element: <Navigate to="/404" /> },
       ],
     },
-    { 
-      path: 'editUser', 
-      element: <EditUser /> 
+    {
+      element: <DashboardLayout />,
+      children: [
+        { element: <Navigate to="/dashboard/editUser" />, index: true },
+        { path: 'editUser', element: <EditUser /> },
+      ],
     },
-    { 
-      path: 'login', 
-      element: <LoginPage /> 
-    },
+
     {
       path: '*',
       element: <Navigate to="/404" replace />,
