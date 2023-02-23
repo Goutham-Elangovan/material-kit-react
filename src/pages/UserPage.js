@@ -3,6 +3,8 @@ import { filter } from 'lodash';
 import { sentenceCase } from 'change-case';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
 // @mui
 import {
   Card,
@@ -31,6 +33,7 @@ import Scrollbar from '../components/scrollbar';
 import { UserListHead, UserListToolbar } from '../sections/@dashboard/user';
 // mock
 import USERLIST from '../_mock/user';
+import { useGetAllUsersQuery } from '../features/api/apiSlice';
 
 // ----------------------------------------------------------------------
 
@@ -74,8 +77,16 @@ function applySortFilter(array, comparator, query) {
   return stabilizedThis.map((el) => el[0]);
 }
 
+// ----------------------------------------------------------------------
+
 export default function UserPage() {
+  const { data } = useGetAllUsersQuery();
+  console.log('DaTA', data);
+
   const navigate = useNavigate();
+
+  console.log("STATE", useSelector((state) => state.users));
+
   const [open, setOpen] = useState(null);
 
   const [page, setPage] = useState(0);

@@ -53,7 +53,7 @@ const EditUser = () => {
   UserDetailsComponent.propTypes = {
     company: PropTypes.string,
     role: PropTypes.string,
-    isVerified: PropTypes.string,
+    isVerified: PropTypes.bool,
     status: PropTypes.string,
   };
 

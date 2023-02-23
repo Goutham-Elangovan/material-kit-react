@@ -1,6 +1,10 @@
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
+import { Provider } from 'react-redux';
+import { ApiProvider } from '@reduxjs/toolkit/query/react';
+import { usersApi } from './features/api/apiSlice';
+import { store } from './store/store';
 
 //
 import App from './App';
@@ -12,11 +16,15 @@ import reportWebVitals from './reportWebVitals';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
-  <HelmetProvider>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </HelmetProvider>
+  <Provider store={store}>
+    <ApiProvider api={usersApi}>
+      <HelmetProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </HelmetProvider>
+    </ApiProvider>
+  </Provider>
 );
 
 // If you want to enable client cache, register instead.
